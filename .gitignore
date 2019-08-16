@@ -1,0 +1,9 @@
+# Created by .ignore support plugin (hsz.mobi)
+*.iml
+/.settings/
+/.idea/
+/.classpath
+/.project
+/target/
+/files/PFAC1801.DBF
+*.log
