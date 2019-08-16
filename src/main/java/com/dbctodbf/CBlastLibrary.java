@@ -19,7 +19,7 @@ public class CBlastLibrary {
 
     private static CLibrary cLibraryInstance = null;
 
-    static CLibrary createInstance() throws IOException {
+    public static CLibrary createInstance() throws IOException {
 
         if (Objects.isNull(cLibraryInstance)) {
             final String pathLibrary = getPathLibrary();
