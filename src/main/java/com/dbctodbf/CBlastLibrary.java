@@ -10,7 +10,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 
-class CBlastLibrary {
+public class CBlastLibrary {
 
     private static final String NOME_TEMP_DLL = "blast_decrypt.dll";
     private static final String NOME_TEMP_SO = "blast_decrypt.so";
