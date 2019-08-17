@@ -16,6 +16,12 @@
             <version>4.12</version>
             <scope>test</scope>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.6</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -43,5 +49,14 @@
                 </executions>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>files</directory>
+                <includes>
+                    <include>libraries/</include>
+                </includes>
+                <targetPath>files</targetPath>
+            </resource>
+        </resources>
     </build>
 </project>

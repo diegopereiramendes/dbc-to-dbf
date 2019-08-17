@@ -4,18 +4,23 @@ import com.dbctodbf.enuns.PlatformSystem;
 import com.dbctodbf.interfaces.CLibrary;
 import com.sun.jna.Native;
 import com.sun.jna.Platform;
+import com.sun.org.apache.bcel.internal.generic.RETURN;
+import org.apache.commons.io.FileUtils;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.Objects;
 
 
 public class CBlastLibrary {
 
-    private static final String NOME_TEMP_DLL = "blast_decrypt.dll";
-    private static final String NOME_TEMP_SO = "blast_decrypt.so";
+    private static final String NAME_TEMP_FILE = "blast_lib.file";
+    private static final String NAME_LIB_WINDOWS = "blast_decrypt.dll";
+    private static final String NAME_LIB_LINUX = "blast_decrypt.so";
     private static final String FOLDER_FILES = "files";
     private static final String FOLDER_LIBRARIES = "libraries";
+    private static final File TEMP_DIRECTORY = new File(System.getProperty("java.io.tmpdir"));
 
     private static CLibrary cLibraryInstance = null;
 
@@ -30,17 +35,24 @@ public class CBlastLibrary {
 
     private static String getPathLibrary() throws IOException {
 
-        final String pathLibrary;
-        final String pathFolderProject = new File(".").getCanonicalPath();
-        final String pathFolderLibraries = pathFolderProject + File.separator + FOLDER_FILES + File.separator + FOLDER_LIBRARIES + File.separator;
+        ClassLoader classLoader = CBlastLibrary.class.getClassLoader();
+        final String pathFolderLibraries = FOLDER_FILES + File.separator + FOLDER_LIBRARIES + File.separator;
+        final InputStream inputStream;
 
         if (Platform.isLinux()) {
-            pathLibrary = pathFolderLibraries + File.separator + PlatformSystem.LINUX + File.separator + NOME_TEMP_SO;
+            inputStream = classLoader.getResourceAsStream(pathFolderLibraries + PlatformSystem.LINUX + File.separator + NAME_LIB_LINUX);
+
         } else {
-            pathLibrary = pathFolderLibraries + File.separator + PlatformSystem.WINDOWS + File.separator + NOME_TEMP_DLL;
+            inputStream = classLoader.getResourceAsStream(pathFolderLibraries + PlatformSystem.WINDOWS + File.separator + NAME_LIB_WINDOWS);
         }
 
-        return pathLibrary;
+        return createFileTemp(inputStream);
+    }
+
+    private static String createFileTemp(InputStream inputStream) throws IOException {
+        File tempFile = new File(TEMP_DIRECTORY + File.separator + NAME_TEMP_FILE);
+        FileUtils.copyInputStreamToFile(inputStream, tempFile);
+        return tempFile.getCanonicalPath();
     }
 }
 

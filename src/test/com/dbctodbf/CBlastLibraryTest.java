@@ -15,8 +15,8 @@ public class CBlastLibraryTest {
 
     @Test
     public void dbc2dbf() {
-        try {
 
+        try {
             final String in = getPathFolderFiles() + FILE_IN_DBC;
             final String out = getPathFolderFiles() + FILE_OUT_DBF;
             final CLibrary cLib;
@@ -28,6 +28,7 @@ public class CBlastLibraryTest {
     }
 
     private String getPathFolderFiles() throws IOException {
+
         String path = new File(".").getCanonicalPath();
         return path + File.separator + "files" + File.separator;
     }
