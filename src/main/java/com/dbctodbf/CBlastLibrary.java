@@ -4,7 +4,6 @@ import com.dbctodbf.enuns.PlatformSystem;
 import com.dbctodbf.interfaces.CLibrary;
 import com.sun.jna.Native;
 import com.sun.jna.Platform;
-import com.sun.org.apache.bcel.internal.generic.RETURN;
 import org.apache.commons.io.FileUtils;
 
 import java.io.File;
